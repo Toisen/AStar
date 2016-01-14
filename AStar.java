@@ -1,6 +1,16 @@
 import java.util.LinkedList;
 
 class Cell {
+    public int x = -1;
+    public int y = -1;
+    public Cell parent = this;
+    public boolean isBlocked = false;
+    public boolean isStart = false;
+    public boolean isFinish = false;
+    public boolean isRoad = false;
+    public int F = 0;
+    public int G = 0;
+    public int H = 0;
     /**
      * Создает клетку с координатами x, y.
      * @param isBlocked является ли клетка непроходимой
@@ -78,20 +88,13 @@ class Cell {
         }
         return " . ";
     }
-
-    public int x = -1;
-    public int y = -1;
-    public Cell parent = this;
-    public boolean isBlocked = false;
-    public boolean isStart = false;
-    public boolean isFinish = false;
-    public boolean isRoad = false;
-    public int F = 0;
-    public int G = 0;
-    public int H = 0;
 }
 
 class Table<T extends Cell> {
+    public int width;
+    public int height;
+    private Cell[][] table;
+
     /**
      * Создаем карту игры с размерами width и height
      */
@@ -129,7 +132,7 @@ class Table<T extends Cell> {
     /**
      * Печать всех клеток поля. Красиво.
      */
-    public void printp() {
+    public void printPath() {
         for (int i = 0; i < AStar.WIDTH; i++) {
             for (int j = 0; j < AStar.HEIGHT; j++) {
                 System.out.print(this.get(j, i));
@@ -140,10 +143,6 @@ class Table<T extends Cell> {
         System.out.println();
         System.out.println();
     }
-
-    public int width;
-    public int height;
-    private Cell[][] table;
 }
 
 public class AStar {
@@ -156,11 +155,11 @@ public class AStar {
      */
     public static void main(String[] args) {
         // Создадим все нужные списки
-        Table<Cell> cells = new Table<Cell>(AStar.WIDTH, AStar.HEIGHT);
+        Table<Cell> cells = new Table<>(AStar.WIDTH, AStar.HEIGHT);
         Table blockList = new Table(AStar.WIDTH, AStar.HEIGHT);
-        LinkedList<Cell> openList = new LinkedList<Cell>();
-        LinkedList<Cell> closedList = new LinkedList<Cell>();
-        LinkedList<Cell> neighbours = new LinkedList<Cell>();
+        LinkedList<Cell> openList = new LinkedList<>();
+        LinkedList<Cell> closedList = new LinkedList<>();
+        LinkedList<Cell> neighbours = new LinkedList<>();
 
         // Создадим преграду
         blockList.add(new Cell(4, 2, true));
@@ -183,7 +182,7 @@ public class AStar {
         Cell start = cells.get(1, 4);
         Cell finish = cells.get(6, 5);
 
-        cells.printp();
+        cells.printPath();
 
         // Фух, начинаем
         boolean isFound = false;
@@ -265,7 +264,7 @@ public class AStar {
                 rd = rd.parent;
                 if (rd == null) break;
             }
-            cells.printp();
+            cells.printPath();
         } else {
             System.out.println("NO ROUTE");
         }

@@ -1,21 +1,16 @@
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 
-/**
- * Created by Toisen on 15.12.2015.
- */
 public class MainStageInit extends Application {
 
-
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -28,9 +23,5 @@ public class MainStageInit extends Application {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
