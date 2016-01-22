@@ -3,9 +3,6 @@ package model;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/**
- * Created by Toisen on 13.01.2016.
- */
 public class Cell extends Rectangle {
     public boolean isBlocked;
 //    public boolean isStart = false;

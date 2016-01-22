@@ -63,11 +63,11 @@ public class SceneController {
     private void fillCircuit() {
         for (int i = 0; i < cells.length; i++) {
             cells[0][i] = new Cell(10, 10, Color.WHITE, true, 0, i);
-            cells[cells.length - 1][i] = new Cell(10, 10, Color.WHITE, true, 0, i);
+            cells[cells.length - 1][i] = new Cell(10, 10, Color.WHITE, true, cells.length - 1, i);
         }
         for (int i = 0; i < cells[0].length; i++) {
             cells[i][0] = new Cell(10, 10, Color.WHITE, true, i, 0);
-            cells[i][cells[0].length - 1] = new Cell(10, 10, Color.WHITE, true, 0, i);
+            cells[i][cells[0].length - 1] = new Cell(10, 10, Color.WHITE, true, i, cells[0].length - 1);
         }
     }
 
