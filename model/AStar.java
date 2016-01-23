@@ -52,28 +52,27 @@ public class AStar {
                     neighbour.H = manDist(neighbour);
                     neighbour.G = price(currentCell); // TODO check this
                     neighbour.F = neighbour.H + neighbour.G;
-                    continue;
-                }
-                // Если клетка уже в открытом списке, то проверяем, не дешевле ли будет путь через эту клетку.
-                // Для сравнения используем стоимость G.
-                if (neighbour.G < currentCell.G) {
+                    // Если клетка уже в открытом списке, то проверяем, не дешевле ли будет путь через эту клетку.
+                    // Для сравнения используем стоимость G.
+                    if (neighbour.G < currentCell.G) {
                     /* Более низкая стоимость G указывает на то, что путь будет дешевле.
                     * Эсли это так, то меняем родителя клетки на текущую клетку
                     * и пересчитываем для нее стоимости G и F.
                     */
-                    neighbour.parent = currentCell;
-                    neighbour.H = manDist(neighbour);
-                    neighbour.G = price(currentCell);    // TODO check this
-                    neighbour.F = neighbour.H + neighbour.G;
+                        neighbour.parent = currentCell;
+                        neighbour.H = manDist(neighbour);
+                        neighbour.G = price(currentCell);    // TODO check this
+                        neighbour.F = neighbour.H + neighbour.G;
+                    }
                 }
-                // Если добавили в открытый список целевую клетку, то путь найден
-                if (openList.contains(finish)) {
-                    isPathFound = true;
-                }
-                // Если проверили все клетки и не нашли путь, то его не существует
-                if (openList.isEmpty()) {
-                    isRouteUnreachable = true;
-                }
+            }
+            // Если добавили в открытый список целевую клетку, то путь найден
+            if (openList.contains(finish)) {
+                isPathFound = true;
+            }
+            // Если проверили все клетки и не нашли путь, то его не существует
+            if (openList.isEmpty()) {
+                isRouteUnreachable = true;
             }
         }
         // Сохраняем путь. Двигаясь назад от целевой точки, проходя от каждой точки к ее родителю до тех пор,
