@@ -32,6 +32,7 @@ public class AStar {
                 ex.printStackTrace();
                 return 2;
             }
+            // TODO: check if not necessary
             for (Cell cell : openList) {
                 if (cell.F < currentCell.F) {
                     currentCell = cell;
@@ -75,7 +76,7 @@ public class AStar {
                 isRouteUnreachable = true;
             }
         }
-        // Сохраняем путь. Двигаясь назад от целевой точки, проходя от каждой точки к ее родителю до тех пор,
+        // Сохраняем путь, двигаясь назад от целевой точки, проходя от каждой точки к ее родителю до тех пор,
         // пока не дойдем до стартовой точки. Это и будет наш путь.
         if (!isRouteUnreachable) {
             Cell rd = finish.parent;
@@ -86,7 +87,6 @@ public class AStar {
             }
 //            cells.printPath();
         } else {
-            System.out.println("NO ROUTE");
             return 1;
         }
         return 0;
@@ -104,17 +104,26 @@ public class AStar {
         }
     }
 
+    // TODO: write test
     public LinkedList<Cell> makeNeighboursList(Cell currentCell) {
         LinkedList<Cell> neighbours = new LinkedList<>();
-        neighbours.clear();
-        neighbours.add(cells[currentCell.x - 1][currentCell.y - 1]);
+        neighbours.clear(); // TODO: check if redundant
+        if (!(cells[currentCell.x - 1][currentCell.y].isBlocked || cells[currentCell.x][currentCell.y - 1].isBlocked)) {
+            neighbours.add(cells[currentCell.x - 1][currentCell.y - 1]);
+        }
         neighbours.add(cells[currentCell.x - 1][currentCell.y]);
-        neighbours.add(cells[currentCell.x - 1][currentCell.y + 1]);
+        if (!(cells[currentCell.x - 1][currentCell.y].isBlocked || cells[currentCell.x][currentCell.y + 1].isBlocked)) {
+            neighbours.add(cells[currentCell.x - 1][currentCell.y + 1]);
+        }
         neighbours.add(cells[currentCell.x][currentCell.y - 1]);
         neighbours.add(cells[currentCell.x][currentCell.y + 1]);
-        neighbours.add(cells[currentCell.x + 1][currentCell.y - 1]);
+        if (!(cells[currentCell.x + 1][currentCell.y].isBlocked || cells[currentCell.x][currentCell.y - 1].isBlocked)) {
+            neighbours.add(cells[currentCell.x + 1][currentCell.y - 1]);
+        }
         neighbours.add(cells[currentCell.x + 1][currentCell.y]);
-        neighbours.add(cells[currentCell.x + 1][currentCell.y + 1]);
+        if (!(cells[currentCell.x + 1][currentCell.y].isBlocked || cells[currentCell.x][currentCell.y + 1].isBlocked)) {
+            neighbours.add(cells[currentCell.x + 1][currentCell.y + 1]);
+        }
         return neighbours;
     }
 }
