@@ -36,6 +36,8 @@ public class SceneController {
 
     @FXML
     private void buttonGenerateClicked() {
+        start = null;
+        finish = null;
         ObservableList<String> options = FXCollections.observableArrayList("Wall", "Start", "End");
         CellType.setItems(options);
         CellType.setValue("Wall");
@@ -91,7 +93,7 @@ public class SceneController {
                         if (cells[i][j].isRoad) {
                             cells[i][j].setFill(Color.BLUE);
                         }
-                        stageGridPane.add(cells[i][j], i, j);
+//                        stageGridPane.add(cells[i][j], i, j);
                     }
                     cells[i][j].setStroke(Color.BLACK);
                     cells[i][j].setOnMouseClicked(t -> {
