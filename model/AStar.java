@@ -32,18 +32,14 @@ public class AStar {
                 ex.printStackTrace();
                 return 2;
             }
-            // TODO: check if not necessary
-            for (Cell cell : openList) {
-                if (cell.F < currentCell.F) {
-                    currentCell = cell;
-                }
-            }
             closedList.push(currentCell);
             openList.remove(currentCell);
             LinkedList<Cell> neighbours = makeNeighboursList(currentCell);
             for (Cell neighbour : neighbours) {
                 // Если клетка непроходимая или она находится в закрытом списке, игнорируем ее
-                if (neighbour.isBlocked || closedList.contains(neighbour)) continue;
+                if (neighbour.isBlocked || closedList.contains(neighbour)) {
+                    continue;
+                }
                 // Если клетка еще не в открытом списке, то добавляем ее туда.
                 // Делаем текущую клетку родительской для этой клетки.
                 // Расчитываем стоимости F, G и H клетки.
@@ -51,7 +47,7 @@ public class AStar {
                     openList.add(neighbour);
                     neighbour.parent = currentCell;
                     neighbour.H = manDist(neighbour);
-                    neighbour.G = price(currentCell); // TODO check this
+                    neighbour.G = price(currentCell);
                     neighbour.F = neighbour.H + neighbour.G;
                     // Если клетка уже в открытом списке, то проверяем, не дешевле ли будет путь через эту клетку.
                     // Для сравнения используем стоимость G.
@@ -62,7 +58,7 @@ public class AStar {
                     */
                         neighbour.parent = currentCell;
                         neighbour.H = manDist(neighbour);
-                        neighbour.G = price(currentCell);    // TODO check this
+                        neighbour.G = price(currentCell);
                         neighbour.F = neighbour.H + neighbour.G;
                     }
                 }
