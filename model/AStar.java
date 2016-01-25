@@ -81,7 +81,6 @@ public class AStar {
                 rd = rd.parent;
                 if (rd == null) break;
             }
-//            cells.printPath();
         } else {
             return 1;
         }
@@ -103,7 +102,6 @@ public class AStar {
     // TODO: write test
     public LinkedList<Cell> makeNeighboursList(Cell currentCell) {
         LinkedList<Cell> neighbours = new LinkedList<>();
-        neighbours.clear(); // TODO: check if redundant
         if (!(cells[currentCell.x - 1][currentCell.y].isBlocked || cells[currentCell.x][currentCell.y - 1].isBlocked)) {
             neighbours.add(cells[currentCell.x - 1][currentCell.y - 1]);
         }

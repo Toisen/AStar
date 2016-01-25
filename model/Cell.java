@@ -5,8 +5,6 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle {
     public boolean isBlocked;
-//    public boolean isStart = false;
-//    public boolean isEnd = false;
     public boolean isRoad = false;
     public int x = -1;
     public int y = -1;

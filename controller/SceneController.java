@@ -17,13 +17,10 @@ import model.Cell;
 public class SceneController {
     @FXML
     TextField XCellsAmountField;
-
     @FXML
     TextField YCellsAmountField;
-
     @FXML
     GridPane stageGridPane;
-
     @FXML
     ComboBox<String> CellType;
     @FXML
@@ -47,9 +44,6 @@ public class SceneController {
         int yCellsAmount = Integer.parseInt(YCellsAmountField.getText()) + 2;
         cells = new Cell[xCellsAmount][yCellsAmount];
         makeBoard(cells);
-        System.out.println("GENERATION COMPLETE. X cells amount is " + XCellsAmountField.getText()
-                + " and Y cells amount is " + YCellsAmountField.getText()
-                + "\n Row count: " + getRowCount(stageGridPane));
     }
 
     @FXML
@@ -93,7 +87,6 @@ public class SceneController {
                         if (cells[i][j].isRoad) {
                             cells[i][j].setFill(Color.BLUE);
                         }
-//                        stageGridPane.add(cells[i][j], i, j);
                     }
                     cells[i][j].setStroke(Color.BLACK);
                     cells[i][j].setOnMouseClicked(t -> {
@@ -126,16 +119,14 @@ public class SceneController {
                                 }
                                 break;
                         }
-                        printRectangleArrayWeights(cells);
                     });
                 }
             }
         } else {
-            System.out.print("stageGridPane is null");
+            System.err.print("stageGridPane is null");
         }
     }
 
-    // debug only
     private int getRowCount(GridPane pane) {
         int numRows = pane.getRowConstraints().size();
         for (int i = 0; i < pane.getChildren().size(); i++) {
@@ -148,15 +139,5 @@ public class SceneController {
             }
         }
         return numRows;
-    }
-
-    // debug only
-    private void printRectangleArrayWeights(Cell[][] rectangleArray) {
-        System.out.println("Nodes weight: \n");
-        for (Cell[] eRectArr : rectangleArray) {
-            for (Cell eRect : eRectArr) {
-                System.out.println("X: " + eRect.x + " Y: " + eRect.y + " BLOCKED: " + eRect.isBlocked);
-            }
-        }
     }
 }
